@@ -1,0 +1,6 @@
+CONTRIBUTING.md
+LICENSE.md
+index.js
+log.txt
+node_modules
+package.json
