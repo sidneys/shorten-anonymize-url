@@ -788,7 +788,7 @@ export ISCLI=0
 				<key>ActionParameters</key>
 				<dict>
 					<key>source</key>
-					<string>on run {input, parameters}	# Get variables	set inputValue to first item of input	set outputValue to second item of input		# Copy to clipboard	set the clipboard to outputValue		# Show Notification	display notification outputValue with title "__SCRIPT_NAME__ __SCRIPT_VERSION__" subtitle "__SCRIPT_NOTIFICATION__" sound name "Submarine"end run</string>
+					<string>on run {input, parameters}	# Get variables	set inputValue to first item of input	set outputValue to second item of input		# Copy to clipboard	set the clipboard to outputValue		# Show Notification	display notification outputValue with title "__SCRIPT_NAME__" subtitle "__SCRIPT_NOTIFICATION__" sound name "Submarine"end run</string>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.RunScript</string>

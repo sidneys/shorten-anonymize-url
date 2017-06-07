@@ -4,10 +4,10 @@
 
 <p align="center">
   <b>Shorten and anonymize (<a href="https://en.wikipedia.org/wiki/URL_redirection#Removing_referer_information">derefer</a>)</b> URLs at the same time.<br>
-   Supports Commandline and programmatic usage.<br><br>
-  Enables <b>right-click URL shortening</b> on macOS via <a href="https://en.wikipedia.org/wiki/List_of_macOS_components#Automator">Automator</a></b>.<br>
-  Includes a macOS Automator <a href="https://thenextweb.com/lifehacks/2011/06/07/how-to-create-mac-os-x-services-with-automator/">Service Workflow</a> and (un-)installation routines.<br><br>
-  Uses <a href="https://goo.gl">goo.gl</a> and <a href="https://anonym2.com">anonym2</a> under the hood.<br>
+   Supports Commandline and programmatic usage.<br>
+  Uses <a href="https://goo.gl">goo.gl</a>, <a href="https://bit.ly">bit.ly</a> and <a href="https://anonym.to">anonym.to</a> under the hood.<br><br>
+  <b>Enables right-click URL shortening on macOS.</b><br>
+  Includes the required <a href="https://en.wikipedia.org/wiki/List_of_macOS_components#Automator">Automator Service</a> and installation toolset.<br><br>
   Available for macOS, Windows and Linux.
 </p>
 
@@ -16,16 +16,16 @@
 
 ## Contents
 
-1. [Commandline Use](#commandline_use)
+1. [Commandline Usage](#commandline_usage)
 1. ['Right-Click' URL Shortener (macOS)](#right-click_url_shortener_(macos))
-1. [Programmatic Use](#programmatic_use)
+1. [Programmatic Usage](#programmatic_usage)
 1. [Platform Support](#platform_support)
 1. [Roadmap](#roadmap)
 1. [Contribute](#contribute)
 1. [Author](#author)
 
 
-## <a name="commandline_use"/></a> Commandline Use
+## <a name="commandline_usage"/></a> Commandline Usage
 
 ### Installation
 
@@ -33,13 +33,15 @@
 $ npm install --global shorten-anonymize-url
 ```
 
-### Use
+### Usage
 
 ```bash
-$ shorten-anonymize-url <url>
+$ shorten-anonymize-url "<url>"
 ```
 
-### Show all Options
+⚠️ Enclose URLs in quotes to handle special characters like as question marks ⚠️
+
+### Show Help and Options
 
 ```bash
 $ shorten-anonymize-url --help
@@ -48,8 +50,8 @@ $ shorten-anonymize-url --help
 ### Example
 
 ```bash
-$ shorten-anonymize-url www.google.com
->> http://anonym2.com/?https://goo.gl/fbsS
+$ shorten-anonymize-url "https://www.google.de/?gfe_rd=cr&ei=WDE4We-3BcfPXr7dpdgH&gws_rd=ssl"
+>> http://bit.ly/2sglJKg
 ```
 
 
@@ -83,7 +85,7 @@ Install [the commandline module](#commandline-use).
 Run the commandline module with the **--service-install** argument:
 
 ```bash
-$ shorten-anonymize-url --service-install
+$ shorten-anonymize-url --service-install
 ```
 
 ### Uninstall the macOS Service
@@ -91,7 +93,7 @@ $ shorten-anonymize-url --service-install
 Run the commandline module with the **--service-uninstall** argument:
 
 ```bash
-$ shorten-anonymize-url --service-uninstall
+$ shorten-anonymize-url --service-uninstall
 ```
 
 ### Use the macOS Service
@@ -103,7 +105,7 @@ $ shorten-anonymize-url --service-uninstall
 
 The clipboard now contains the shortened and anonymized URL.
 
-## <a name="programmatic_use"/></a> Programmatic Use
+## <a name="programmatic_usage"/></a> Programmatic Usage
 
 ### Installation
 
@@ -113,41 +115,32 @@ $ npm install --save shorten-anonymize-url
 
 ### API
 
-The module returns a `Function`:
+The module returns a `Function` which takes 3 arguments and returns a `Promise`:
 
 ```js
 const shortenAnonymizeUrl = require('shorten-anonymize-url')
-```
-
-The `Function` returns a `Promise` and takes 2 arguments:
-
-```js
-const promise = shortenAnonymizeUrl(url, key)
-```
-
- - **url** *String* - Bundle identifier for the callback function
- - [optional] **apikey** *String* - goo.gl API key
-
-The `Promise` resolves with 1 property:
-
-```js
-promise.then((url) => {
-    console.log(url);
+shortenAnonymizeUrl(url, bitlyKey, googlKey)
+.then((shorturl) => {
+    console.log(shorturl);
 })
 ```
 
- - **url** *String* - **Shortened anonymised url**
+ - **url** *String* - Bundle identifier for the callback function
+ - **bitlyKey** [optional] *String* - bit.ly API key
+ - **googlKey** [optional] *String* - goo.gl API key
+
+The `Promise` resolves with:
+
+ - **shorturl** *String* - **Shortened anonymised bit.ly url**
 
 ### Example
 
 ```js
 const shortenAnonymizeUrl = require('shorten-anonymize-url')
-
-shortenAnonymizeUrl('www.google.com')
+shortenAnonymizeUrl('reddit.com')
 .then((url) => {
     console.log(url);
-    // Returns:
-    // http://anonym2.com/?https://goo.gl/fbsS
+    // http://bit.ly/2qWTDzM
 })
 .catch((err) => {
     console.error(err);
@@ -157,14 +150,18 @@ shortenAnonymizeUrl('www.google.com')
 
 ## <a name="platform_support"/></a> Platform Support
 
-Tested on macOS Sierra, Windows 10 Anniversary and Ubuntu 17.10.
+Tested on:
+
+- macOS Sierra
+- Windows 10 Anniversary
+- Ubuntu 17.10
+
 Global 'Right-Click' url shortening only supported on macOS for now.
 
 
 ## <a name="roadmap"/></a> Roadmap ![img](https://img.shields.io/badge/proposals-welcome-green.svg?style=flat)
 
-- [ ] Global 'Right-Click' URL shortening for Windows
-- [ ] Global 'Right-Click' URL shortening for Linux
+- [ ] Global Right-Click URL shortening for Windows + Linux
 - [ ] CI-based automated Testing
 
 
