@@ -5,7 +5,7 @@
 <p align="center">
   <b>Shorten and anonymize (<a href="https://en.wikipedia.org/wiki/URL_redirection#Removing_referer_information">derefer</a>)</b> URLs at the same time.<br>
    Supports Commandline and programmatic usage.<br>
-  Uses <a href="https://goo.gl">goo.gl</a>, <a href="https://bit.ly">bit.ly</a> and <a href="https://anonym.to">anonym.to</a> under the hood.<br><br>
+  Uses <a href="https://goo.gl">goo.gl</a>, <a href="https://bit.ly">bit.ly</a> and <a href="https://dereferer.me">dereferer.me</a> under the hood.<br><br>
   <b>Enables right-click URL shortening on macOS.</b><br>
   Includes the required <a href="https://en.wikipedia.org/wiki/List_of_macOS_components#Automator">Automator Service</a> and installation toolset.<br><br>
   Available for macOS, Windows and Linux.
